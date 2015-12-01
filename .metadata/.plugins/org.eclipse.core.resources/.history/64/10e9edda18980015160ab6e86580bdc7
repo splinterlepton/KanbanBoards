@@ -1,0 +1,10 @@
+
+public class Column {
+
+	public String name;
+	//List<Task> toDo = new ArrayList<Task>();
+	
+	public Column (String name) {
+		this.name = name;
+	}
+}

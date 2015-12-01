@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Kanban {
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		List<Board> boardList = new ArrayList<Board>();
+		
+		boardList.add(new Board("Test Board", "testing"));
+		boardList.add(new Board("Test Board2", "testing"));
+		boardList.add(new Board("Test Board3", "testing"));
+		
+		
+		for (Board i: boardList) {
+			System.out.println(i.getInfo());
+		}
+
+	}
+
+}

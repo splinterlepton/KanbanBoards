@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Column {
+
+	public String name;
+	
+	List<Task> task = new ArrayList<Task>();
+	
+	public Column (String name) {
+		this.name = name;
+	}
+}

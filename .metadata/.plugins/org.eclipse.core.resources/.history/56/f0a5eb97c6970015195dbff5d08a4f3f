@@ -1,0 +1,41 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Board {
+	
+	private String name;
+	private String desc;
+    
+	public Board (String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getComment() {
+        return desc;
+    }
+
+    public void setComment(String desc) {
+        this.desc = desc;
+    }
+	
+	List<Task> workItemList = new ArrayList<Task>();
+	List<Task> toDo = new ArrayList<Task>();
+	List<Task> development = new ArrayList<Task>();
+	List<Task> tests = new ArrayList<Task>();
+	List<Task> completed = new ArrayList<Task>();
+	
+	public String getInfo() {
+		return "Kaban name: "+name+" "+desc;
+	}
+
+
+}

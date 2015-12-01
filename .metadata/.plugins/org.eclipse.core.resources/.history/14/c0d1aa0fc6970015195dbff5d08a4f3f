@@ -1,0 +1,14 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Board {
+	
+	
+	List<Task> workItemList = new ArrayList<Task>();
+	List<Task> toDo = new ArrayList<Task>();
+	List<Task> development = new ArrayList<Task>();
+	List<Task> tests = new ArrayList<Task>();
+	List<Task> completed = new ArrayList<Task>();
+
+
+}

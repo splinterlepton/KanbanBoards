@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;Board.java&apos; to &apos;KanbanBoard.java&apos;&#x0D;&#x0A;- Original project: &apos;Kanban&apos;&#x0D;&#x0A;- Original element: &apos;Board.java&apos;&#x0D;&#x0A;- Renamed element: &apos;KanbanBoard.java&apos;" description="Rename compilation unit &apos;Board.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;{Board.java" name="KanbanBoard.java" references="false" stamp="1448961800596" version="1.0"/>
+</session>

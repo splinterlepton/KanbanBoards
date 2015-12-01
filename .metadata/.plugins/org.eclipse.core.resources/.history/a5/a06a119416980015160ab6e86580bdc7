@@ -1,0 +1,6 @@
+
+public class Column {
+
+	String name;
+	List<Task> toDo = new ArrayList<Task>();
+}

@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Kanban {
+	
+    public String getUserInput() {
+        return sc.nextLine().trim();
+    }
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int flag = 0;
+		List<Board> boardList = new ArrayList<Board>();
+		
+		Scanner sc = new Scanner(System.in);
+		
+		while (true) {
+			System.out.println("1 - add project \n 2 - remove project");
+			
+			switch(flag) {
+			case 1: boardList.add(new Board());
+			}
+		}
+		
+
+	}
+
+}

@@ -1,0 +1,39 @@
+//import java.util.Date;
+
+public class Task {
+
+	private String name;
+	private String desc;
+	private String comment;
+    //private Date deadline;
+    //private Integer storyPoints;
+	
+	public Task (String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String spec) {
+        this.desc = spec;
+    }
+	
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+}

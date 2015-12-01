@@ -1,0 +1,48 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class KanbanBoard {
+	
+	public String name;
+	public String desc;
+
+	public Task task;
+	
+	List<Task> toDo = new ArrayList<Task>();
+	List<Task> doing = new ArrayList<Task>();
+	List<Task> done = new ArrayList<Task>();
+
+    
+	public KanbanBoard (String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getComment() {
+        return desc;
+    }
+
+    public void setComment(String desc) {
+        this.desc = desc;
+    }
+	
+	/* mapa
+	public Task getTast(String name) {
+		return this.
+	}
+    */
+    
+	public String getInfo() {
+		return "Kaban name: "+name+" , description: "+desc;
+	}
+
+
+}

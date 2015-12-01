@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Kanban {
+
+	public static void main(String[] args) {
+		
+		List<KanbanBoard> boardList = new ArrayList<KanbanBoard>(); //list of projects
+		
+		boardList.add(new KanbanBoard("Rozk³ad jazdy", 
+				"stworzenie interaktywnego rozk³adu jazdy kolejek SKM na urz¹dzenia mobine")); //adding a new project (new KanbanBoard)
+		boardList.get(0).column.add(new Column("To Do"));	//setting project columns
+		boardList.get(0).column.add(new Column("Development"));
+		boardList.get(0).column.add(new Column("Tests"));
+		boardList.get(0).column.add(new Column("Completed"));
+		
+		boardList.get(0).column.get(0).task.add(new Task("Interfejs u¿ytkownika", 
+				"stworzyæ przejrzysty, graficzny interfejs u¿ytkownika", "brak komentarza"));
+		boardList.get(0).column.get(0).task.add(new Task("Zadanie2", 
+				"opis2", "komentarz2"));
+		boardList.get(0).column.get(1).task.add(new Task("Zadanie3", 
+				"opis3", "komentarz3"));
+		
+		
+		System.out.println(boardList.get(0).column.get(0).task.get(0).getInfo());
+		
+		
+	//	System.out.println("-----------------------------");
+	//	System.out.println("Lista zadañ projektu Test Board w kolumnie toDo: ");
+	//	System.out.println("ZADANIE: "+boardList.get(0).toDo.get(0).getName()+", OPIS: "+boardList.get(0).toDo.get(0).getDesc());
+
+
+		//hashmap nazwa - nazwa projektu, wartoœæ - board
+	}
+
+}
