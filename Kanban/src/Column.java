@@ -17,9 +17,9 @@ public class Column {
 //	}
 	
 	public String getInfo () {
-		buffer1 = "<<<<<< "+name+" >>>>>>\n";
+		buffer1 = "<<<<<< "+name+" >>>>>>";
 		for (Task i: task) {
-			buffer1 += i.getInfo();
+			buffer1 = buffer1 + "\n\n" + i.getInfo();
 		}
 		return buffer1;
 	}

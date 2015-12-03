@@ -1,0 +1,18 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Comment {
+	public String title;
+	public String text;
+	private String buffer3;
+	List<User> owner = new ArrayList<User>();
+	
+	public String getInfo() {
+		buffer3 = "\t"+"Comment: "+title+", Text: "+text;
+		for (User i: owner) {
+			buffer3 = buffer3 + i.getName() + "\n";
+		}
+		return buffer3;
+	}
+
+}

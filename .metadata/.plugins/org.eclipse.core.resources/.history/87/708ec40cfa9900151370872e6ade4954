@@ -1,0 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Comment {
+	public String title;
+	public String text;
+	List<User> owner = new ArrayList<User>();
+	
+	Comment (String title, String text, List<User> owner) {
+		this.title = title;
+		this.text = text;
+		owner.add((User) owner);
+	}
+	
+
+}

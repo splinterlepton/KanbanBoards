@@ -1,0 +1,61 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+//import java.util.Date;
+
+public class Task {
+
+	public String name;
+	public String desc;
+    private Integer storyPoints;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+	List<User> owner = new ArrayList<User>();
+	List<Comment> comment = new ArrayList<Comment>();
+	Date date = null;
+
+	public void setDeadline (String stringDate) {
+		try {
+		    date = sdf.parse(stringDate);
+		} catch (ParseException pe) {
+		    System.out.println("Wrong data format!");
+		}
+	}
+	
+	
+	public Task (String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+	
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String spec) {
+        this.desc = spec;
+    }
+	
+    
+	public String getInfo() {
+		String buffer = "TASK NAME: " + name + ", DESCRIPTION: " + desc + "\nOWNER(S):";
+		for (int i=0; i<owner.size(); i++) {
+			if (i>0) {
+				buffer += " i";
+			}
+			buffer = buffer + " " + owner.get(i).name;
+		}
+		return buffer;
+	}
+}

@@ -30,6 +30,7 @@ public class KanbanBoard {
     public void setComment(String desc) {
         this.desc = desc;
     }
+    
 	
 	/* mapa
 	public Task getTast(String name) {
@@ -39,9 +40,9 @@ public class KanbanBoard {
     
 	public String getInfo () {
 		buffer2 = "<<<<<<<<<<<<<<< KANBAN BOARD "+name+">>>>>>>>>>>>>>\n";
-		buffer2 = buffer2 + desc + "\n";
+		buffer2 = buffer2 + desc;
 		for (Column i: column) {
-			buffer2 = buffer2 +i.getInfo()+"";
+			buffer2 = buffer2 + "\n\n" + i.getInfo();
 		}
 		return buffer2;
 	}

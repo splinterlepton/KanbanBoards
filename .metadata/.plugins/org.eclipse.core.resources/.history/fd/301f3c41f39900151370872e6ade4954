@@ -1,0 +1,51 @@
+import java.util.ArrayList;
+import java.util.List;
+
+//import java.util.Date;
+
+public class Task {
+
+	public String name;
+	public String desc;
+    //private Date deadline;
+    //private Integer storyPoints;
+	List<User> owner = new ArrayList<User>();
+	List<Comment> comment = new ArrayList<Comment>();
+	
+	
+	
+	
+	public Task (String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+	
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String spec) {
+        this.desc = spec;
+    }
+	
+    
+	public String getInfo() {
+		String buffer = "TASK NAME: " + name + ", DESCRIPTION: " + desc + "\nOWNER(S):";
+		for (int i=0; i<owner.size(); i++) {
+			if (i>0) {
+				buffer += " i";
+			}
+			buffer = buffer + " " + owner.get(i).name;
+		}
+		return buffer;
+	}
+}

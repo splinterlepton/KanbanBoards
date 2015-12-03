@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Kanban {
+	
+	String name;
+	String description;
+	static List<KanbanBoard> boardList = new ArrayList<KanbanBoard>(); //list of projects
+	
+	
+	
+	static void addKanbonBoard (String name, String description) {
+		boardList.add(new KanbanBoard(name, description));
+		
+	}
+
+	public static void main(String[] args) {
+		
+		Map<String, User> userMap = new HashMap<String, User>();
+		userMap.put("Adam", new User("Adam", "647859036"));
+		userMap.put("Arek", new User("Arek", "600500400"));
+		
+		System.out.println(userMap.get(1));
+		
+		addKanbonBoard("Rozk³ad jazdy", "fds");
+		
+		
+		boardList.get(0).column.add(new Column("To Do"));
+		boardList.get(0).column.add(new Column("Development"));
+		boardList.get(0).column.add(new Column("Tests"));
+		boardList.get(0).column.add(new Column("Completed"));
+		
+		boardList.get(0).column.get(0).task.add(new Task("Interfejs u¿ytkownika", 
+				"stworzyæ przejrzysty, graficzny interfejs u¿ytkownika", "brak komentarza"));		// adding some data
+		boardList.get(0).column.get(0).task.add(new Task("Zadanie2", 
+				"opis2", "komentarz2"));
+		boardList.get(0).column.get(1).task.add(new Task("Zadanie3", 
+				"opis3", "komentarz3"));
+		
+		System.out.println(boardList.get(0).getInfo());  //writing in the console
+		
+		
+		//hashmap nazwa - nazwa projektu, wartoœæ - board
+	}
+
+}

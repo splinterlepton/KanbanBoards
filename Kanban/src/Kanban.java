@@ -1,28 +1,61 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Kanban {
+	
+	String name;
+	String description;
+	static List<KanbanBoard> boardList = new ArrayList<KanbanBoard>(); //list of projects
+	
+	static void addKanbonBoard (String name, String description) {
+		boardList.add(new KanbanBoard(name, description));
+		
+	}
 
+	
+	
+	
 	public static void main(String[] args) {
 		
-		List<KanbanBoard> boardList = new ArrayList<KanbanBoard>(); //list of projects
+		Map<String, User> userMap = new HashMap<String, User>();
+		userMap.put("Adam", new User("Adam", "647859036"));
+		userMap.put("Arek", new User("Arek", "600500400"));
 		
-		boardList.add(new KanbanBoard("Rozk³ad jazdy", 
-				"stworzenie interaktywnego rozk³adu jazdy kolejek SKM na urz¹dzenia mobine")); //adding a new project (new KanbanBoard)
-		boardList.get(0).column.add(new Column("To Do"));	//setting project columns
+		
+		//new kanban board created
+		addKanbonBoard("Rozk³ad jazdy", "oto opis kanban boarda rozk³ad jazdy");
+		
+		//dodajemy kilka kolumn
+		boardList.get(0).column.add(new Column("To Do"));
 		boardList.get(0).column.add(new Column("Development"));
 		boardList.get(0).column.add(new Column("Tests"));
 		boardList.get(0).column.add(new Column("Completed"));
 		
+		//3 new tasks added
 		boardList.get(0).column.get(0).task.add(new Task("Interfejs u¿ytkownika", 
-				"stworzyæ przejrzysty, graficzny interfejs u¿ytkownika", "brak komentarza"));		// adding some data
+				"stworzyæ przejrzysty, graficzny interfejs u¿ytkownika"));		// adding some data
 		boardList.get(0).column.get(0).task.add(new Task("Zadanie2", 
-				"opis2", "komentarz2"));
+				"opis2", 3));
 		boardList.get(0).column.get(1).task.add(new Task("Zadanie3", 
-				"opis3", "komentarz3"));
+				"opis3", 2));
+		
+		//owners assigned to the tasks
+		boardList.get(0).column.get(0).task.get(0).owner.add(userMap.get("Adam"));
+		boardList.get(0).column.get(0).task.get(0).owner.add(userMap.get("Arek"));
+		boardList.get(0).column.get(0).task.get(1).owner.add(userMap.get("Adam"));
+		boardList.get(0).column.get(1).task.get(0).owner.add(userMap.get("Adam"));
+		
+		//deadline added
+		boardList.get(0).column.get(1).task.get(0).setDeadline("2015.12.12");
+		
+		//new coment added
+		boardList.get(0).column.get(1).task.get(0).comment.add
+		(new Comment("Siê robi", "Bu³ka z mas³em :)", userMap.get("Arek")));
 		
 		System.out.println(boardList.get(0).getInfo());  //writing in the console
-		
+
 		
 		//hashmap nazwa - nazwa projektu, wartoœæ - board
 	}

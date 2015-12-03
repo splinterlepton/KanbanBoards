@@ -1,0 +1,16 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Comment {
+	public String title;
+	public String text;
+	//private String buffer3;
+	public User owner;
+	
+	Comment (String title, String text) {
+		this.title = title;
+		this.text = text;
+	}
+	
+
+}
