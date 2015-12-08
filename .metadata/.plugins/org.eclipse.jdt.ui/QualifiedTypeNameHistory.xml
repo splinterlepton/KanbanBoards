@@ -10,4 +10,7 @@
 <fullyQualifiedTypeName name="dbconnection.DBConnection"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="javax.xml.stream.events.Comment"/>
+<fullyQualifiedTypeName name="model.Comment"/>
+<fullyQualifiedTypeName name="model.User"/>
 </qualifiedTypeNameHistroy>

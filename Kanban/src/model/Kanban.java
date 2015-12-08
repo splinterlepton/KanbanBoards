@@ -1,7 +1,6 @@
 package model;
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import dbconnection.DBConnection;
@@ -9,17 +8,102 @@ import dbconnection.DBConnection;
 
 public class Kanban {
 	
-	String name;
-	String description;
-	static List<KanbanBoard> boardList = new ArrayList<KanbanBoard>(); //list of projects
+	static Map<String, KanbanBoard> boardList = new HashMap<String, KanbanBoard>(); //list of projects
 	static DBConnection db = new DBConnection();
 	static Map<String, User> userMap = new HashMap<String, User>();
 	
+	static Map<String, User> test = new HashMap<String, User>();
+
+	
 	static void addKanbonBoard (String name, String description) {
-		boardList.add(new KanbanBoard(name, description));
-		
+		boardList.put(name, new KanbanBoard(name, description));
 	}
 	
+	static void updateKanbonBoard (String name, String newName, String newDescription) {
+		boardList.get(name).setComment(newDescription);
+		boardList.get(name).setName(newName);
+	}
+	
+	static void deleteKanbonBoard (String name) {
+		boardList.remove(name);
+	}
+	
+	static void viewKanbanBoardsList () {
+		for (Map.Entry<String, KanbanBoard> entry : boardList.entrySet()) {
+		    System.out.println(entry.getValue().getList());
+		}
+	}
+	
+	static void viewKanbanBoard (String name) {
+		System.out.println(boardList.get(name).getInfo());
+	}
+	
+	static void addColumn (String kanbanBoardName, String columnName) {
+		boardList.get(kanbanBoardName).column.put(columnName, new Column(columnName));
+	}
+	
+	static void updateColumn (String kanbanBoardName, String columnName, String newColumnName) {
+		boardList.get(kanbanBoardName).column.get(columnName).setName(newColumnName);;
+	}
+	
+	static void deleteColumn (String kanbanBoardName, String columnName) {
+		boardList.get(kanbanBoardName).column.remove(columnName);
+	}
+	
+	static void addTask (String kanbanBoardName, String columnName, String taskName, String desc) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.put(taskName, new Task(taskName, desc));
+	}
+	
+	static void deleteTask (String kanbanBoardName, String columnName, String taskName) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.remove(taskName);
+	}
+	
+	static void moveTask (String kanbanBoardName, String taskName, String oldColumnName, String newColumnName) {
+		boardList.get(kanbanBoardName).column.get(newColumnName).task.put(taskName, 
+				boardList.get(kanbanBoardName).column.get(oldColumnName).task.get(taskName));
+		boardList.get(kanbanBoardName).column.get(oldColumnName).task.remove(taskName);
+	}
+	
+	static void updateTaskName (String kanbanBoardName, String columnName, String oldTaskName, String newTaskName) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.put(newTaskName, 
+				boardList.get(kanbanBoardName).column.get(columnName).task.get(oldTaskName));
+		boardList.get(kanbanBoardName).column.get(columnName).task.remove(oldTaskName);
+	}
+
+	static void updateTaskDesc (String kanbanBoardName, String columnName, String taskName, String newDesc) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).setDesc(newDesc);
+	}
+	
+	static void updateTaskStoryPoints (String kanbanBoardName, String columnName, String taskName, int newStoryPoints) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).setStoryPoints(newStoryPoints);
+	}
+	
+	static void updateTaskDate (String kanbanBoardName, String columnName, String taskName, String newDateyyyyMMdd) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).setDeadline(newDateyyyyMMdd);
+	}
+
+	static void addComment (String kanbanBoardName, String columnName, String taskName, String title, String text, String owner) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).
+		comment.put(title, new Comment(title, text, userMap.get(owner)));
+	}
+	
+	static void deleteComment (String kanbanBoardName, String columnName, String taskName, String title) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).
+		comment.remove(title);
+	}
+	
+	static void addTaskUser (String kanbanBoardName, String columnName, String taskName, String userName) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).
+		owner.put(userName, userMap.get(userName));
+		userMap.get(userName).plusProjectsNumber();
+	}
+	
+	static void deleteTaskUser (String kanbanBoardName, String columnName, String taskName, String userName) {
+		boardList.get(kanbanBoardName).column.get(columnName).task.get(taskName).
+		owner.remove(userName);
+		userMap.get(userName).minusProjectsNumber();
+	}
+
 	public static void showUsers () {
 		userMap = db.selectUsers();
 		for (Map.Entry<String, User> entry : userMap.entrySet()) {
@@ -70,7 +154,6 @@ public class Kanban {
 	public static void main(String[] args) {
 		userMap = db.selectUsers();
 		
-		//showUsers();
 		//System.out.println();
 		//addUser("Ula", "777888777");
 		
@@ -78,43 +161,45 @@ public class Kanban {
 		//updateUser("Ula", "Urszula", "123123123");
 		showUsers();
 		
+		System.out.println("--------------");
 		
 		//new kanban board created
-		addKanbonBoard("Rozk³ad jazdy", "oto opis kanban boarda rozk³ad jazdy");
+		addKanbonBoard("Rozk³ad jazdy", "stworzenie interaktywnego rozk³adu jazdy kolejek SKM");
+		addKanbonBoard("Przewodnik po ZOO", "stworzenie przewodnika po ZOO na urz¹dzenia mobilne");
+		addKanbonBoard("System AVR", "stworzenie systemu 'automated voice response'");
 		
-		//dodajemy kilka kolumn
-		boardList.get(0).column.add(new Column("To Do"));
-		boardList.get(0).column.add(new Column("Development"));
-		boardList.get(0).column.add(new Column("Tests"));
-		boardList.get(0).column.add(new Column("Completed"));
+		viewKanbanBoardsList();
+		System.out.println("-------------");
 		
-		//3 new tasks added
-		boardList.get(0).column.get(0).task.add(new Task("Interfejs u¿ytkownika", 
-				"stworzyæ przejrzysty, graficzny interfejs u¿ytkownika"));		// adding some data
-		boardList.get(0).column.get(0).task.add(new Task("Zadanie2", 
-				"opis2", 3));
-		boardList.get(0).column.get(1).task.add(new Task("Zadanie3", 
-				"opis3", 2));
+		updateKanbonBoard("Przewodnik po ZOO", "ZOO", "przewodnik po ZOO na urz¹dzenia mobilne");
+		deleteKanbonBoard("System AVR");
 		
-		//owners assigned to the tasks
-		boardList.get(0).column.get(0).task.get(0).owner.add(userMap.get("Adam"));
-		userMap.get("Adam").projectsNumber++;
-		boardList.get(0).column.get(0).task.get(0).owner.add(userMap.get("Arek"));
-		userMap.get("Arek").projectsNumber++;
-		boardList.get(0).column.get(0).task.get(1).owner.add(userMap.get("Adam"));
-		userMap.get("Adam").projectsNumber++;
-		boardList.get(0).column.get(1).task.get(0).owner.add(userMap.get("Adam"));
-		userMap.get("Adam").projectsNumber++;
+		viewKanbanBoardsList();
+		System.out.println("-------------");
 		
-		//deadline added
-		boardList.get(0).column.get(1).task.get(0).setDeadline("2015.12.12");
 		
-		//new coment added
-		boardList.get(0).column.get(1).task.get(0).comment.add
-		(new Comment("Siê robi", "Bu³ka z mas³em :)", userMap.get("Arek")));
+		addColumn("Rozk³ad jazdy", "ToDo");
+		addColumn("Rozk³ad jazdy", "Development");
+		addColumn("Rozk³ad jazdy", "Tests");
+		addColumn("Rozk³ad jazdy", "Completed");
 		
-		System.out.println(boardList.get(0).getInfo());  //writing in the console
-				
+		addTask("Rozk³ad jazdy", "Development", "GUI", "Stworzyæ przejrzysty, graficzny interfejs u¿ytkownika");
+		addTask("Rozk³ad jazdy", "Development", "Zadanie2", "Opis2");
+		addTask("Rozk³ad jazdy", "Tests", "Zadanie3", "Opis3");
+		addTask("Rozk³ad jazdy", "ToDo", "Zadanie4", "Opis4");
+		
+		updateTaskStoryPoints("Rozk³ad jazdy", "Tests", "Zadanie3", 3);
+		updateTaskDate("Rozk³ad jazdy", "Tests", "Zadanie3", "20151216");
+		
+		addTaskUser("Rozk³ad jazdy", "Development", "GUI", "Adam");
+		addTaskUser("Rozk³ad jazdy", "Development", "Zadanie2", "Arek");
+		addTaskUser("Rozk³ad jazdy", "Development", "Zadanie2", "Piotrek");
+		addTaskUser("Rozk³ad jazdy", "Tests", "Zadanie3", "Ewa");
+		
+		addComment("Rozk³ad jazdy", "Tests", "Zadanie3", "Siê robi", "bu³ka z mas³em", "Ewa");
+		
+		viewKanbanBoard("Rozk³ad jazdy");
+		
 		
 		db.closeConnection();
 	}

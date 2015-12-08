@@ -1,0 +1,85 @@
+package model;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+//import java.util.Date;
+
+public class Task {
+
+	public String name;
+	public String desc;
+    public int storyPoints = 0;
+    
+	public Map<String, User> owner = new HashMap<String, User>();
+	public Map<String, Comment> comment = new HashMap<String, Comment>();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	Date date = null;
+
+	public Task (String name) {
+		this.name = name;
+	}
+	
+	public Task (String name, String desc) {
+		this.name = name;
+		this.desc = desc;
+	}
+	
+	public Task (String name, String desc, int storyPoints) {
+		this.name = name;
+		this.desc = desc;
+		this.storyPoints = storyPoints;
+	}
+	
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setDesc(String spec) {
+        this.desc = spec;
+    }
+    
+    public String getDesc() {
+        return desc;
+    }
+
+    public int getStoryPoints() {
+        return storyPoints;
+    }
+    
+    public void setStoryPoints(int storyPoints) {
+        this.storyPoints = storyPoints;
+    }
+
+	public void setDeadline (String stringDate) {
+		try {
+		    date = sdf.parse(stringDate);
+		} catch (ParseException pe) {
+		    System.out.println("Wrong data format!");
+		}
+	}
+	
+	public String getInfo() {
+		String buffer = "TASK NAME: " + name + ", DESCRIPTION: " + desc + "\nOWNER(S):";
+		int flag = 0;
+		for (Map.Entry<String, User> entry : owner.entrySet()) {
+			if (flag>0) {
+				buffer += " i";
+			}
+		    buffer = buffer + "\n" + entry.getValue().getInfo();
+		    flag++;
+		}	
+		
+		buffer = buffer + " STORY POINTS: " + storyPoints + "\n" + "DEADLINE: " + date;
+		for (Map.Entry<String, Comment> entry : comment.entrySet()) {
+		    buffer = buffer + "\n" + entry.getValue().getInfo();
+		}	
+		return buffer;
+	}
+}

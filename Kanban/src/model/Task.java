@@ -1,9 +1,9 @@
 package model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 //import java.util.Date;
 
@@ -11,15 +11,13 @@ public class Task {
 
 	public String name;
 	public String desc;
-    private int storyPoints = 0;
+    public int storyPoints = 0;
     
-	List<User> owner = new ArrayList<User>();
-	List<Comment> comment = new ArrayList<Comment>();
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+	public Map<String, User> owner = new HashMap<String, User>();
+	public Map<String, Comment> comment = new HashMap<String, Comment>();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	Date date = null;
 
-
-	
 	public Task (String name) {
 		this.name = name;
 	}
@@ -67,20 +65,21 @@ public class Task {
 		}
 	}
 	
-	
-    
 	public String getInfo() {
 		String buffer = "TASK NAME: " + name + ", DESCRIPTION: " + desc + "\nOWNER(S):";
-		for (int i=0; i<owner.size(); i++) {
-			if (i>0) {
+		int flag = 0;
+		for (Map.Entry<String, User> entry : owner.entrySet()) {
+			if (flag>0) {
 				buffer += " i";
 			}
-			buffer = buffer + " " + owner.get(i).name;
-		}
+		    buffer = buffer + " " + entry.getValue().getName();
+		    flag++;
+		}	
+		
 		buffer = buffer + " STORY POINTS: " + storyPoints + "\n" + "DEADLINE: " + date;
-		for (Comment i: comment) {
-			buffer = buffer + "\n" + i.getInfo();
-		}
+		for (Map.Entry<String, Comment> entry : comment.entrySet()) {
+		    buffer = buffer + "\n" + entry.getValue().getInfo();
+		}	
 		return buffer;
 	}
 }

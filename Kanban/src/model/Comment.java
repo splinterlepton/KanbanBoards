@@ -3,7 +3,7 @@ package model;
 public class Comment {
 	public String title;
 	public String text;
-	User owner;
+	public User owner;
 	
 	Comment (String title, String text, User owner) {
 		this.title = title;

@@ -35,6 +35,13 @@ public class User {
         this.projectsNumber = projectsNumber;
     }
     
+    public void plusProjectsNumber() {
+        projectsNumber++;
+    }
+    
+    public void minusProjectsNumber() {
+        projectsNumber--;
+    }
    
     public String getInfo () {
     	return "I AM USER "+name+", I'VE GOT "+projectsNumber+" PROJECTS, CALL ME MABYE: "+phone;
