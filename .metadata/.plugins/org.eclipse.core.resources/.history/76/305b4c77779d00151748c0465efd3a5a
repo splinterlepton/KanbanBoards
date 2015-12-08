@@ -1,0 +1,96 @@
+package model;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import dbconnection.DBConnection;
+
+
+public class Kanban {
+	
+	String name;
+	String description;
+	static List<KanbanBoard> boardList = new ArrayList<KanbanBoard>(); //list of projects
+	static DBConnection db = new DBConnection();
+	static Map<String, User> userMap = new HashMap<String, User>();
+	
+	static void addKanbonBoard (String name, String description) {
+		boardList.add(new KanbanBoard(name, description));
+		
+	}
+	
+	public static void showUsers () {
+		userMap = db.selectUsers();
+
+		for (Map.Entry<String, User> entry : userMap.entrySet()) {
+		    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue().getInfo());
+		}
+//		userMap.put(users.get(0).name, users.get(0));
+	//	userMap.put(users.get(1).name, users.get(1));
+		//userMap.put(users.get(2).name, users.get(2));
+	}
+	
+	public static void addUser (String name, String phone) {
+		db.insertUsers(name, phone);
+	}
+	
+	public static void deleteUser (String name) {
+	//	if ()
+		//db.deleteUsers(name);
+	}
+	
+	public static void updateUser (String oldName, String newName, String newPhone) {
+	//	db.deleteUsers(oldName);
+		//db.insertUsers(newName, "647859036");
+	}
+
+	public static void main(String[] args) {
+		
+		//db.insertUsers("Adam", "555444333");
+		showUsers();
+		
+	        
+		/*
+		//new kanban board created
+		addKanbonBoard("Rozk³ad jazdy", "oto opis kanban boarda rozk³ad jazdy");
+		
+		//dodajemy kilka kolumn
+		boardList.get(0).column.add(new Column("To Do"));
+		boardList.get(0).column.add(new Column("Development"));
+		boardList.get(0).column.add(new Column("Tests"));
+		boardList.get(0).column.add(new Column("Completed"));
+		
+		//3 new tasks added
+		boardList.get(0).column.get(0).task.add(new Task("Interfejs u¿ytkownika", 
+				"stworzyæ przejrzysty, graficzny interfejs u¿ytkownika"));		// adding some data
+		boardList.get(0).column.get(0).task.add(new Task("Zadanie2", 
+				"opis2", 3));
+		boardList.get(0).column.get(1).task.add(new Task("Zadanie3", 
+				"opis3", 2));
+		
+		//owners assigned to the tasks
+		boardList.get(0).column.get(0).task.get(0).owner.add(userMap.get("Adam"));
+		boardList.get(0).column.get(0).task.get(0).owner.add(userMap.get("Arek"));
+		boardList.get(0).column.get(0).task.get(1).owner.add(userMap.get("Adam"));
+		boardList.get(0).column.get(1).task.get(0).owner.add(userMap.get("Adam"));
+		
+		//deadline added
+		boardList.get(0).column.get(1).task.get(0).setDeadline("2015.12.12");
+		
+		//new coment added
+		boardList.get(0).column.get(1).task.get(0).comment.add
+		(new Comment("Siê robi", "Bu³ka z mas³em :)", userMap.get("Arek")));
+		
+		System.out.println(boardList.get(0).getInfo());  //writing in the console
+
+		*/
+		
+	 
+		
+		
+		//hashmap nazwa - nazwa projektu, wartoœæ - board
+		db.closeConnection();
+	}
+
+}
